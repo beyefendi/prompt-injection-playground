@@ -4,7 +4,7 @@
 $ErrorActionPreference = "Stop"
 
 # ---- CONFIG ----
-$PYTHON_BIN = "python3.13"  # Assumes python3.13 is in PATH or use full path
+$PYTHON_BIN = "python.exe"  # Assumes python3.13 is in PATH or use full path
 
 $VENV_NAME = ".venv"
 $KERNEL_NAME = "prompt-injection-playground-notebook-env"
@@ -57,7 +57,7 @@ if (-not (Test-Path "$SPIKEE_DIR")) {
     git clone "$SPIKEE_REPO"
     Write-Success "spikee cloned."
 } else {
-    Write-Info "spikee already exists — skipping clone."
+    Write-Info "spikee already exists -- skipping clone."
 }
 
 # Clone llm-webmail
@@ -66,7 +66,7 @@ if (-not (Test-Path "$LLM_WEBMAIL_DIR")) {
     git clone -b feat --single-branch "$LLM_WEBMAIL_REPO"
     Write-Success "llm-webmail cloned."
 } else {
-    Write-Info "llm-webmail already exists — skipping clone."
+    Write-Info "llm-webmail already exists -- skipping clone."
 }
 
 Pop-Location  # return to notebook-project directory
@@ -76,17 +76,17 @@ Write-Host "`n=== Copying environment config files ===" -ForegroundColor Cyan
 # Copy .env for spikee
 if (Test-Path "$SPIKEE_ENV_SRC") {
     Copy-Item "$SPIKEE_ENV_SRC" "$WORKSPACE_ROOT/$SPIKEE_DIR/.env"
-    Write-Success "Copied $SPIKEE_ENV_SRC → $SPIKEE_DIR/.env"
+    Write-Success "Copied $SPIKEE_ENV_SRC -- $SPIKEE_DIR/.env"
 } else {
-    Write-Error-Custom "WARNING: $SPIKEE_ENV_SRC not found — skipping."
+    Write-Error-Custom "WARNING: $SPIKEE_ENV_SRC not found -- skipping."
 }
 
 # Copy .env for llm-webmail
 if (Test-Path "$LLM_WEBMAIL_ENV_SRC") {
     Copy-Item "$LLM_WEBMAIL_ENV_SRC" "$WORKSPACE_ROOT/$LLM_WEBMAIL_DIR/.env"
-    Write-Success "Copied $LLM_WEBMAIL_ENV_SRC → $LLM_WEBMAIL_DIR/.env"
+    Write-Success "Copied $LLM_WEBMAIL_ENV_SRC -- $LLM_WEBMAIL_DIR/.env"
 } else {
-    Write-Error-Custom "WARNING: $LLM_WEBMAIL_ENV_SRC not found — skipping."
+    Write-Error-Custom "WARNING: $LLM_WEBMAIL_ENV_SRC not found -- skipping."
 }
 
 Write-Host "`n=== Creating virtual environment ===" -ForegroundColor Cyan
@@ -140,9 +140,9 @@ New-Item -ItemType Directory -Force -Path "$WORKSPACE_DIR" | Out-Null
 
 if (Test-Path "utils/attacks.ipynb") {
     Copy-Item "utils/attacks.ipynb" "$WORKSPACE_DIR/workspace.ipynb"
-    Write-Success "Copied utils/attacks.ipynb → $WORKSPACE_DIR/workspace.ipynb"
+    Write-Success "Copied utils/attacks.ipynb -- $WORKSPACE_DIR/workspace.ipynb"
 } else {
-    Write-Error-Custom "WARNING: utils/attacks.ipynb not found — skipping."
+    Write-Error-Custom "WARNING: utils/attacks.ipynb not found -- skipping."
 }
 
 Write-Host "`n=== Setup complete! ===" -ForegroundColor Green
